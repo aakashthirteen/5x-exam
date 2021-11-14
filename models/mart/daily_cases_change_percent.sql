@@ -1,4 +1,4 @@
-select *, ((total_cases-last_day)/total_cases) * 100 percentage_increase
+select location, to_date(date, 'mm/dd/YYYY')date, total_cases, last_day, ((total_cases-last_day)/total_cases) * 100 percentage_increase
 from (select location, 
     date, 
     total_cases, 
