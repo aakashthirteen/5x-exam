@@ -10,6 +10,6 @@ group by 1,2,3,4),
 t2 as (
 select t1.*, ifnull(lag(Monthly_Recovery) over(partition by country order by to_date(mmyyyy, 'mm/yyyy')), 0) last_month_recovery
 from t1)
-select t2.*, case when Monthly_Recovery = 0 then last_month_recovery 
+select t2.*,to_date(mmyyyy, 'mm/yyyy') date, case when Monthly_Recovery = 0 then last_month_recovery 
             else ((Monthly_Recovery-last_month_recovery)/Monthly_Recovery)*100 end as Monthly_Change
 from t2
